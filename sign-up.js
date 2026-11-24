@@ -98,8 +98,14 @@
     var keys = ['name', 'email', 'password', 'confirm', 'agree'], first = null;
     keys.forEach(function (k) { touched[k] = true; if (!check(k) && !first) first = f[k]; });
     if (first) { if (!first.disabled) first.focus(); return; }
+    try {
+      window.localStorage.setItem('haven.displayName', f.name.value.trim());
+    } catch (error) {
+      toast('Could not save your display name. Check your browser storage settings and try again.');
+      return;
+    }
     busy = true; $('#create').disabled = true; $('#spin').hidden = false; $('#createLabel').textContent = 'Creating your Haven…';
-    // No backend here: the account is simulated and nothing is stored.
+    // This preview stores only the display name; account details are not persisted.
     setTimeout(function () {
       window.location.href = 'first-memories.html';
     }, reduce ? 0 : 900);

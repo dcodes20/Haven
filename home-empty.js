@@ -14,6 +14,12 @@
   var now = new Date(), hr = now.getHours();
   $('#date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   $('#hi').textContent = hr < 5 ? 'Good evening' : hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening';
+  var displayName = window.localStorage.getItem('haven.displayName');
+  if (displayName) {
+    $('#who').textContent = displayName;
+    $('#avatar').textContent = displayName.charAt(0).toUpperCase();
+    $('#avatar').setAttribute('aria-label', displayName + '\'s account');
+  }
 
   /* Tabs: Home is this screen; the others are separate screens */
   var names = { library: 'Library', album: 'Album', profile: 'Profile' };

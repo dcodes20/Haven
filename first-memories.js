@@ -34,6 +34,6 @@
     window.location.href = 'saving-memories.html';
   });
   $('#skip').addEventListener('click', function () {
-    toast('Skipped. You can add memories any time.');
+    window.location.href = 'home-empty.html';
   });
 })();

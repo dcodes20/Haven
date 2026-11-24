@@ -13,6 +13,8 @@
   var now = new Date(), hr = now.getHours();
   $('#date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   $('#hi').textContent = hr < 5 ? 'Good evening' : hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening';
+  var displayName = window.localStorage.getItem('haven.displayName');
+  if (displayName) $('#who').textContent = displayName;
   var clock = function (d) { return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0'); };
 
   /* Tabs */
