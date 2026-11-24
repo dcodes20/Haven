@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haven Home Filled</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,1&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="home-filled.css">
+<link rel="stylesheet" href="effects.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="side" aria-label="Haven">
+    <div class="brand"><img src="assets/icon.webp" alt="" width="24" height="24"><span>Haven</span></div>
+    <nav aria-label="Main">
+      <button class="nav" type="button" data-tab="home" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</button>
+      <button class="nav" type="button" data-tab="library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>Library</button>
+      <button class="nav" type="button" data-tab="album"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 22H4a2 2 0 0 1-2-2V6"/><path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18"/><circle cx="12" cy="8" r="2"/><rect width="16" height="16" x="6" y="2" rx="2"/></svg>Album</button>
+      <button class="nav" type="button" data-tab="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+    </nav>
+    <button class="cta" type="button" data-add><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add memories</button>
+    <p class="foot">Original quality, always. Only you can see what&rsquo;s here.</p>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="top-in pad">
+        <div class="brand"><img src="assets/icon.webp" alt="" width="24" height="24"><span>Haven</span></div>
+        <button class="avatar" type="button" id="avatar" aria-label="Your account"><img src="assets/profile pic.png" alt=""></button>
+      </div>
+    </header>
+
+    <main class="content pad">
+      <section class="welcome" aria-label="Welcome">
+        <div class="greet">
+          <p class="date" id="date">Monday, November 16</p>
+          <p class="hello"><span id="hi">Good morning</span> <b id="who">Tess</b></p>
+        </div>
+        <div class="status live" id="status" role="status" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12.2 2.7 2.7L16.2 9.4"/></svg>
+          <div><p class="t">All <b id="count">128</b> memories are safe</p><p class="s">Last upload today at <span id="last">9:32</span></p></div>
+        </div>
+      </section>
+
+      <section class="day" aria-label="On this day" data-reveal>
+        <div class="sec-head">
+          <h2>On this day</h2>
+          <button class="year" type="button" id="year" aria-label="Change year, now 2025"><span id="yearT">2025</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+        <button class="story" type="button" id="story" data-tilt="4" aria-label="Open this day">
+          <img id="storyImg" src="./assets/Moody Golden-Hour Street Style.png" alt="">
+          <span class="when" id="when">A year ago</span>
+          <span class="cap-wrap"><h3 id="storyT">Salt air. No plans.</h3><span class="sub" id="storyS">16 November 2025  &middot;  8 memories</span></span>
+        </button>
+      </section>
+
+      <div class="rail">
+        <section class="recent" aria-label="Recently added" data-reveal>
+          <div class="sec-head"><h2>Recent</h2><button class="seeall" type="button" id="seeAll">See all</button></div>
+          <div class="tiles" id="tiles"></div>
+          <p class="today" id="today">Today  &middot;  3 memories</p>
+        </section>
+
+        <section class="space" aria-label="Storage" data-reveal>
+          <button class="store" type="button" id="store" aria-expanded="false" aria-controls="storeMore">
+            <span class="store-row">
+              <span class="store-l"><b>Your space</b><span class="u" id="used">2.4 GB of 10 GB used</span></span>
+              <span class="cap" role="progressbar" aria-label="Storage used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="24" id="cap"><i id="capFill"></i></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
+            <span class="more" id="storeMore"><span><p>10 GB plan. Everything is kept in original quality and only you can see it. Free up your phone any time, your saved copies stay here.</p></span></span>
+          </button>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <nav class="tabs" aria-label="Main">
+    <div class="tabs-in">
+      <button class="tab" type="button" data-tab="home" aria-current="page"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>Home</button>
+      <button class="tab" type="button" data-tab="library"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg></span>Library</button>
+      <button class="add" type="button" data-add aria-label="Add memories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+      <button class="tab" type="button" data-tab="album"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 22H4a2 2 0 0 1-2-2V6"/><path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18"/><circle cx="12" cy="8" r="2"/><rect width="16" height="16" x="6" y="2" rx="2"/></svg></span>Album</button>
+      <button class="tab" type="button" data-tab="profile"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>Profile</button>
+    </div>
+  </nav>
+</div>
+
+<input class="pick" id="pick" type="file" accept="image/*,video/*" multiple tabindex="-1" aria-hidden="true">
+<dialog class="viewer" id="viewer"><button class="x" type="button" id="viewerX" aria-label="Close">&times;</button><figure><div class="media" id="viewerMedia"></div><figcaption id="viewerCap"></figcaption></figure></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="effects.js"></script>
+<script src="home-filled.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+/* Shared by every Haven screen: desktop and tablet card layout, cursor glow, ripple, shimmer, reveal, confetti. */
+
+/* Ambient glow that follows the pointer (JS sets --mx / --my) */
+.fx-glow {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(560px 440px at var(--mx, 72%) var(--my, 18%), rgba(245, 161, 123, .11), transparent 70%),
+    radial-gradient(680px 540px at calc(100vw - var(--mx, 72%)) calc(100vh - var(--my, 18%)), rgba(197, 213, 181, .08), transparent 70%);
+}
+
+/* Press ripple */
+.fx-r { position: relative; overflow: hidden; }
+.fx-ripple {
+  position: absolute; border-radius: 50%; background: rgba(255, 255, 255, .32); pointer-events: none;
+  transform: scale(0); animation: fx-rip .65s ease-out forwards;
+}
+@keyframes fx-rip { to { transform: scale(1); opacity: 0; } }
+
+/* Progress bars shimmer */
+.fill { position: relative; overflow: hidden; }
+.fill::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35), transparent);
+  animation: fx-shim 1.8s ease-in-out infinite;
+}
+@keyframes fx-shim { to { transform: translateX(100%); } }
+
+/* Scroll reveal: items stay visible unless JS has marked them as below the fold */
+.fx-pre { opacity: 0; }
+
+/* Tilt targets ease back smoothly */
+[data-tilt] { transition: transform .18s ease-out; will-change: transform; }
+[data-magnetic] { transition: translate .2s ease-out, background-color .18s ease, transform .18s ease; }
+
+/* Spotlight on cards */
+[data-spot] { background-image: radial-gradient(260px circle at var(--sx, -200px) var(--sy, -200px), rgba(245, 161, 123, .12), transparent 70%); }
+
+/* Scroll progress (landing) */
+.fx-prog {
+  position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); height: 3px; z-index: 70;
+  background: var(--peach, #f5a17b); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none;
+}
+
+/* Confetti pieces */
+.fx-bit { position: fixed; z-index: 95; pointer-events: none; will-change: transform, opacity; }
+
+/* Tablet and up: the app screens sit in a rounded card on the dark page */
+@media (min-width: 640px) {
+  .page {
+    --gutter: 44px;
+    max-width: 540px;
+    margin-block: clamp(20px, 4vh, 48px);
+    min-height: min(900px, calc(100svh - clamp(40px, 8vh, 96px)));
+    border: 1px solid #2a2e25; border-radius: 28px;
+    background: linear-gradient(180deg, #151811, #11140e);
+    box-shadow: 0 40px 90px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .03);
+  }
+}
+@media (min-width: 1280px) {
+  .page { max-width: 580px; }
+}
+@media (max-height: 640px) and (min-width: 640px) {
+  .page { min-height: 0; margin-block: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-glow, .fx-prog { display: none; }
+  .fill::after { animation: none; display: none; }
+  [data-tilt], [data-magnetic] { transition: none; }
+}

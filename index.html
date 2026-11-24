@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Haven</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,1&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="effects.css">
+</head>
+<body>
+
+<header class="top" data-fx-progress>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Haven home"><img src="assets/icon.webp" alt="" width="24" height="24"><span>Haven</span></a>
+    <a class="login" href="log-in.html">Log in</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero-band" aria-label="Haven">
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <div class="kicker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Private memory space</span>
+        </div>
+        <h1 class="display"><span class="a">Life moves on.</span><span class="b">Your memories, safe forever</span></h1>
+        <p class="lede">A beautiful, private home for your photos and videos. Safe here. Even when they’re no longer on your phone.</p>
+        <div class="actions">
+          <a class="btn primary" href="sign-up.html" data-magnetic>Get started
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+          <a class="btn ghost" href="#how" data-scroll>See how it works&nbsp; ↓</a>
+        </div>
+        <p class="fine">Your originals, always. Your memories.&nbsp; ·&nbsp; Download anytime</p>
+      </div>
+
+      <div class="collage" id="collage" data-tilt="7">
+        <button class="print p1" type="button" aria-label="Photo print: The coast, just me"><img src="assets/print-coast.webp" alt="Black and white portrait of a woman in a gele and aso oke, captioned The coast, just me" width="420" height="519"></button>
+        <button class="print p2" type="button" aria-label="Photo print: Sunday, at studio"><img src="assets/print-sunday.webp" alt="A woman taking a mirror selfie in a studio, captioned Sunday, at studio" width="420" height="518"></button>
+        <button class="print p3" type="button" aria-label="Photo print: Somewhere in the Dolomites"><img src="assets/print-dolomites.webp" alt="Painted portrait of a young man looking down, captioned Somewhere in the Dolomites" width="560" height="698"></button>
+        <button class="print p4" type="button" aria-label="Photo print: A very good ordinary day"><img src="assets/print-ordinary.webp" alt="A man in a white shirt and wide striped trousers in a hall, captioned A very good ordinary day" width="420" height="530"></button>
+        <button class="print p5" type="button" aria-label="Photo print: One more sunset"><img src="assets/print-sunset.webp" alt="Sepia photo of a woman walking on a garden path, captioned One more sunset" width="420" height="575"></button>
+        <div class="saved" role="status">
+          <span class="tick" aria-hidden="true">✓</span>
+          <div><b>Safe in Haven</b><small id="savedCount">5 memories. Right where they belong.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="promise" id="promise">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>The Everkeep promise</p>
+      <h2 class="display" data-reveal>Off your phone. Not out of your life.</h2>
+      <p class="body">Once it’s safely uploaded, it stays here until you delete it here. Lost phones, cleared camera rolls, new beginnings, your memories stay put.</p>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>01 / Make yourself at home</p>
+      <h2 class="display" data-reveal>A few taps today. A thousand thank-yous later.</h2>
+      <p class="sub">No complicated setup. Just you and the moments worth keeping.</p>
+      <ol class="steps">
+        <li class="step" data-reveal><span class="n">01</span><h3>Bring your memories</h3><p>Choose photos and videos, or drag them in. On your phone? Tap to select and upload.</p></li>
+        <li class="step" data-reveal><span class="n">02</span><h3>Know when they’re safe</h3><p>Follow every upload from start to saved. Connection dropped? Pick up where you left off.</p></li>
+        <li class="step" data-reveal><span class="n">03</span><h3>Make room for more life</h3><p>See “Safe in Haven”, then free up your phone. Come back to your originals, anytime.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="gallery" id="library-section">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>02 / More than a camera roll</p>
+      <h2 class="display" data-reveal>Don’t just store it. Come back to it.</h2>
+      <p class="lede">Little moments. Big chapters. A space that makes you want to look again.</p>
+
+      <div class="phone-col" id="library" data-reveal>
+        <div class="phone">
+          <div class="phone-head">
+            <h3 class="display">Your library</h3>
+            <button class="add" type="button" id="addBtn" aria-label="Add memories">+</button>
+          </div>
+          <div class="search"><label class="sr" for="q">Search your memories</label><input id="q" type="search" placeholder="Search your memories…" autocomplete="off"></div>
+          <div class="tabs" role="tablist" aria-label="Library filter">
+            <button class="tab" role="tab" type="button" data-tab="all" aria-selected="true">All memories</button>
+            <button class="tab" role="tab" type="button" data-tab="photo" aria-selected="false">Photos</button>
+            <button class="tab" role="tab" type="button" data-tab="video" aria-selected="false">Videos</button>
+          </div>
+          <div class="month"><b>June 2026</b><span id="safeState">✓  Everything is safe</span></div>
+          <p class="tagline">The days we’ll talk about.</p>
+          <div class="grid" id="grid">
+            <button class="tile tall" type="button" data-type="photo" data-title="The great outdoors"><img src="assets/lib-outdoors.webp" alt="The great outdoors" width="420" height="455"><span class="cap">The great outdoors</span></button>
+            <button class="tile" type="button" data-type="photo" data-title="The coast, just us"><img src="assets/lib-coast.webp" alt="The coast, just us" width="355" height="400"><span class="cap">The coast, just us</span></button>
+            <button class="tile" type="button" data-type="photo" data-title="A very good ordinary day"><img src="assets/lib-ordinary.webp" alt="A very good ordinary day" width="350" height="410"><span class="cap">A very good ordinary day</span></button>
+            <button class="tile" type="button" data-type="photo" data-title="Sunday, at home"><img src="assets/lib-sunday.webp" alt="Sunday, at home" width="370" height="405"><span class="cap">Sunday, at home</span></button>
+            <button class="tile" type="button" data-type="photo" data-title="One more sunset"><img src="assets/lib-sunset.webp" alt="One more sunset" width="350" height="420"><span class="cap">One more sunset</span></button>
+          </div>
+          <p class="empty" id="empty" hidden></p>
+        </div>
+        <p class="samplelabel">Sample library</p>
+      </div>
+
+      <p class="desc">Find it by date. Gather it into albums. See it in a whole new light.</p>
+    </div>
+  </section>
+
+  <section class="yours">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>03 / Your memories. Your say.</p>
+      <h2 class="display" data-reveal>A safe place. Not a lock-in.</h2>
+      <div class="cards">
+        <article class="fact" data-reveal data-spot><p class="big display">100%</p><hr><h3>The way you captured it.</h3><p>Original quality, always. Download a photo, a video, or an entire album whenever you like.</p><p class="tag">ORIGINALS KEPT ORIGINAL</p></article>
+        <article class="fact" data-reveal data-spot><p class="big display">Only you</p><hr><h3>Private, until you say otherwise.</h3><p>Share a memory with a private link. Set an expiry or turn it off whenever you choose.</p><p class="tag">NO PUBLIC FEED. NO STRANGERS.</p></article>
+        <article class="fact" data-reveal data-spot><p class="big sm display">A second chance</p><hr><h3>A little room to change your mind.</h3><p>Deleted something here by mistake? Restore it from Recently deleted during the recovery window.</p><p class="tag">DELETING ON YOUR PHONE IS SEPARATE</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="start" id="start">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>For the moments you can’t make twice</p>
+      <h2 class="display" data-reveal>Keep a little of your life.</h2>
+      <p class="lede">The big days. The blurry nights. The beautifully ordinary in-between.</p>
+      <a class="btn" href="sign-up.html" data-magnetic>Start keeping your memories&nbsp; ↗</a>
+      <p class="note">Choose your first memory. We’ll give it a home.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="mark">Haven</p>
+    <p class="tagline2">A little space. A lot of life.</p>
+    <nav class="links" aria-label="Footer">
+      <a href="#promise" data-scroll>Our promise</a>
+      <a href="#" data-soon="Privacy isn't part of this design yet.">Privacy</a>
+      <a href="#" data-soon="Terms aren't part of this design yet.">Terms</a>
+      <a href="#" data-soon="Contact isn't part of this design yet.">Contact</a>
+    </nav>
+    <hr>
+    <p class="legal">© 2026 Haven. Keep what matters.</p>
+  </div>
+</footer>
+
+<input id="pick" class="sr" type="file" accept="image/*,video/*" multiple tabindex="-1" aria-hidden="true">
+<dialog class="viewer" id="viewer"><button class="x" type="button" id="viewerX" aria-label="Close">×</button><figure><div class="media" id="viewerMedia"></div><figcaption id="viewerCap"></figcaption></figure></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="effects.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

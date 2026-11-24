@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haven Memories Saved</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0,1;1,9..144,400..700,0,1&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="memories-saved.css">
+<link rel="stylesheet" href="effects.css">
+</head>
+
+<body>
+<div class="page">
+  <header class="head">
+    <button class="back" type="button" id="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="brand"><img src="assets/icon.webp" alt="" width="24" height="24"><span>Haven</span></div>
+  </header>
+
+  <div class="bar"><div class="progress" role="img" aria-label="Step 1 of 3"><i class="on"></i><i></i><i></i></div></div>
+
+  <main class="content">
+    <p class="eyebrow">A little peace of mind</p>
+
+    <div class="fan" id="fan" data-tilt="9" role="group" aria-label="Your first saved memories">
+      <button class="card left" type="button" data-name="Coast.jpg" aria-label="Coast.jpg, photo"><img src="assets/Coast.png" alt=""></button>
+      <button class="card right" type="button" data-name="Mountains.mov" data-video="true" data-playing="false" aria-label="Mountains.mov, video">
+        <img src="assets/Mountains.png" alt="">
+        <span class="play" aria-hidden="true">
+          <svg class="tri" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <svg class="pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg>
+        </span>
+      </button>
+      <button class="card mid" type="button" data-name="Sunday.jpg" aria-label="Sunday.jpg, photo"><img src="assets/Sunday.png" alt=""></button>
+      <button class="safe" type="button" id="safe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12.2 2.7 2.7L16.2 9.4"/></svg>
+        Safe in Haven
+      </button>
+    </div>
+
+    <h1><span>They’re safe.</span> <span><em>They’re yours.</em></span></h1>
+    <p class="sub" id="sub">3 memories saved in original quality.</p>
+
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+      <div><b>Off your phone. Still in Haven.</b><span>Deleting on your phone won’t remove your saved copies here.</span></div>
+    </div>
+  </main>
+
+  <div class="next">
+    <a class="btn" href="home-empty.html" id="go">Go to memories</a>
+    <p class="fine">2 photos  ·  1 video  ·  50 MB  ·  Only you</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="effects.js"></script>
+<script src="memories-saved.js"></script>
+</body>
+</html>
