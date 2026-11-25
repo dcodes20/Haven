@@ -37,6 +37,28 @@
     var n = tiles().length;
     $('#savedCount').textContent = n + (n === 1 ? ' memory' : ' memories') + '. Right where they belong.';
   }
+  function renderStoredMedia(records) {
+    $$('[data-stored-media]', grid).forEach(function (tile) { tile.remove(); });
+    records.slice().reverse().forEach(function (record) {
+      var item = HavenMediaStore.mediaItem(record), tile = document.createElement('button');
+      tile.type = 'button'; tile.className = 'tile'; tile.dataset.type = item.video ? 'video' : 'photo';
+      tile.dataset.title = item.name; tile.dataset.storedMedia = '';
+      var media = document.createElement(item.video ? 'video' : 'img');
+      media.src = item.url;
+      if (item.video) { media.muted = true; media.playsInline = true; media.preload = 'metadata'; }
+      else { media.alt = item.name; }
+      var caption = document.createElement('span'); caption.className = 'cap'; caption.textContent = item.name;
+      tile.appendChild(media); tile.appendChild(caption); grid.insertBefore(tile, grid.firstChild);
+    });
+    apply(); syncCount();
+  }
+  function refreshStoredMedia() {
+    return HavenMediaStore.list().then(renderStoredMedia);
+  }
+  function reportMediaError(action, error) {
+    stateEl.textContent = 'Could not ' + action;
+    toast('Could not ' + action + ': ' + error.message);
+  }
   function apply() {
     var term = q.value.trim().toLowerCase(), shown = 0;
     tiles().forEach(function (t) {
@@ -79,21 +101,19 @@
   pick.addEventListener('change', function () {
     var files = Array.prototype.slice.call(pick.files || []).filter(function (f) { return /^(image|video)\//.test(f.type); });
     if (!files.length) return;
-    files.forEach(function (f) {
-      var isVideo = f.type.indexOf('video/') === 0, url = URL.createObjectURL(f);
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'tile';
-      b.dataset.type = isVideo ? 'video' : 'photo';
-      var title = f.name.replace(/\.[^.]+$/, '') || 'New memory'; b.dataset.title = title;
-      var m = document.createElement(isVideo ? 'video' : 'img'); m.src = url;
-      if (isVideo) { m.muted = true; m.playsInline = true; m.preload = 'metadata'; } else { m.alt = title; }
-      var c = document.createElement('span'); c.className = 'cap'; c.textContent = title;
-      b.appendChild(m); b.appendChild(c); grid.insertBefore(b, grid.firstChild);
-    });
-    q.value = ''; tab = 'all';
-    $$('.tab').forEach(function (o) { o.setAttribute('aria-selected', String(o.dataset.tab === 'all')); });
-    apply(); syncCount();
     stateEl.textContent = 'Saving ' + files.length + '…';
     clearTimeout(stateTimer);
-    stateTimer = setTimeout(function () { stateEl.textContent = '✓  Everything is safe'; toast('Safe in Haven. ' + tiles().length + ' memories.'); if (window.HavenFX) HavenFX.confetti(innerWidth / 2, innerHeight * .6, 60); }, reduce ? 0 : 1100);
+    HavenMediaStore.add(files).then(refreshStoredMedia).then(function () {
+      q.value = ''; tab = 'all';
+      $$('.tab').forEach(function (o) { o.setAttribute('aria-selected', String(o.dataset.tab === 'all')); });
+      apply(); syncCount(); stateEl.textContent = '✓  Everything is safe';
+      toast('Safe in Haven. ' + tiles().length + ' memories.');
+      if (window.HavenFX) HavenFX.confetti(innerWidth / 2, innerHeight * .6, 60);
+    }).catch(function (error) { reportMediaError('save your media', error); });
+  });
+
+  refreshStoredMedia().catch(function (error) { reportMediaError('load your media', error); });
+  HavenMediaStore.subscribe(function () {
+    refreshStoredMedia().catch(function (error) { reportMediaError('refresh your media', error); });
   });
 })();

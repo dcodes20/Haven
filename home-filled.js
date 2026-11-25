@@ -21,8 +21,10 @@
   var names = { library: 'Library', album: 'Album', profile: 'Profile' };
   $$('[data-tab]').forEach(function (b) {
     b.addEventListener('click', function () {
+      if (b.tagName === 'A') return;
       var t = b.dataset.tab;
       if (t === 'home') { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
+      if (t === 'library' && b.closest('.tabs')) { window.location.href = 'library-all.html'; return; }
       toast(names[t] + ' is a separate screen.');
     });
   });
@@ -54,12 +56,14 @@
   $('#storyS').textContent = dateLong + ' 2025  \u00b7  8 memories';
 
   /* Recent memories */
-  var items = [
+  var demoItems = [
     { name: 'The great outdoors', url: 'assets/dan.png' },
     { name: 'Sunday, at home', url: 'assets/Dramatic Side Lighting Portrait.png' },
     { name: 'One more sunset', url: 'assets/Image_fx (32).jpg', video: true, dur: '0:18' }
   ];
-  var total = 128, bytes = 2.4 * 1073741824, todayN = 3, TOTAL = 10 * 1073741824;
+  var items = demoItems.slice();
+  var BASE_TOTAL = 128, BASE_BYTES = 2.4 * 1073741824, BASE_TODAY = 3, TOTAL = 10 * 1073741824;
+  var total = BASE_TOTAL, bytes = BASE_BYTES, todayN = BASE_TODAY;
   var tilesEl = $('#tiles'), pick = $('#pick');
   var check = '<span class="saved" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
   var playI = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="12" height="12"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>';
@@ -86,6 +90,20 @@
     var pct = Math.min(100, bytes / TOTAL * 100);
     $('#capFill').style.width = pct + '%'; $('#cap').setAttribute('aria-valuenow', Math.round(pct));
   }
+  function refreshMedia() {
+    return HavenMediaStore.list().then(function (records) {
+      var uploaded = records.map(HavenMediaStore.mediaItem);
+      items = uploaded.concat(demoItems);
+      total = BASE_TOTAL + records.length;
+      bytes = BASE_BYTES + records.reduce(function (sum, record) { return sum + record.size; }, 0);
+      todayN = BASE_TODAY + records.filter(HavenMediaStore.isToday).length;
+      render(false); syncStorage();
+      return records;
+    });
+  }
+  function reportMediaError(action, error) {
+    toast('Could not ' + action + ': ' + error.message);
+  }
   function countTo(el, from, to) {
     if (reduce) { el.textContent = to; return; }
     var t0 = performance.now(), d = 700;
@@ -100,13 +118,14 @@
     var files = Array.prototype.slice.call(pick.files || []).filter(function (f) { return /^(image|video)\//.test(f.type); });
     if (!files.length) return;
     var before = total;
-    files.forEach(function (f) {
-      items.unshift({ name: f.name.replace(/\.[^.]+$/, '') || 'New memory', url: URL.createObjectURL(f), video: f.type.indexOf('video/') === 0, file: true });
-      bytes += f.size; total++; todayN++;
-    });
-    render(true); syncStorage(); countTo($('#count'), before, total); $('#last').textContent = clock(new Date());
-    toast(files.length + (files.length === 1 ? ' memory' : ' memories') + ' safe in Haven.');
-    if (window.HavenFX) HavenFX.confetti(innerWidth / 2, innerHeight * .5, 60);
+    HavenMediaStore.add(files).then(function (records) {
+      return refreshMedia().then(function () { return records; });
+    }).then(function (records) {
+      render(true); syncStorage(); countTo($('#count'), before, total);
+      $('#last').textContent = clock(new Date(records[records.length - 1].createdAt));
+      toast(files.length + (files.length === 1 ? ' memory' : ' memories') + ' safe in Haven.');
+      if (window.HavenFX) HavenFX.confetti(innerWidth / 2, innerHeight * .5, 60);
+    }).catch(function (error) { reportMediaError('save your media', error); });
   });
 
   /* Storage details */
@@ -127,7 +146,13 @@
   dlg.addEventListener('click', function (e) { if (e.target === dlg) closeViewer(); });
 
   /* Arrival: count up and fill the storage bar */
-  render(false);
-  countTo($('#count'), 0, total);
-  requestAnimationFrame(function () { setTimeout(syncStorage, 60); });
+  refreshMedia().then(function () {
+    countTo($('#count'), 0, total);
+    requestAnimationFrame(function () { setTimeout(syncStorage, 60); });
+  }).catch(function (error) { reportMediaError('load your media', error); });
+  HavenMediaStore.subscribe(function () {
+    var before = total;
+    refreshMedia().then(function () { countTo($('#count'), before, total); })
+      .catch(function (error) { reportMediaError('refresh your media', error); });
+  });
 })();

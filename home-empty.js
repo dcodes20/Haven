@@ -25,6 +25,7 @@
   var names = { library: 'Library', album: 'Album', profile: 'Profile' };
   $$('[data-tab]').forEach(function (b) {
     b.addEventListener('click', function () {
+      if (b.tagName === 'A') return;
       var t = b.dataset.tab;
       if (t === 'home') { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
       toast(names[t] + ' is a separate screen.');
@@ -85,6 +86,16 @@
     if (bytes && pct < 4) pct = 4;
     $('#capFill').style.width = pct + '%'; $('#cap').setAttribute('aria-valuenow', Math.round(pct));
   }
+  function refreshMedia() {
+    return HavenMediaStore.list().then(function (records) {
+      items = records.map(HavenMediaStore.mediaItem);
+      bytes = records.reduce(function (sum, record) { return sum + record.size; }, 0);
+      render(false); sync();
+    });
+  }
+  function reportMediaError(action, error) {
+    toast('Could not ' + action + ': ' + error.message);
+  }
 
   $$('[data-add]').forEach(function (b) { b.addEventListener('click', function () { pick.value = ''; pick.click(); }); });
   tilesEl.addEventListener('click', function (e) {
@@ -95,13 +106,10 @@
   pick.addEventListener('change', function () {
     var files = Array.prototype.slice.call(pick.files || []).filter(function (f) { return /^(image|video)\//.test(f.type); });
     if (!files.length) return;
-    files.forEach(function (f) {
-      items.unshift({ name: f.name.replace(/\.[^.]+$/, '') || 'New memory', url: URL.createObjectURL(f), video: f.type.indexOf('video/') === 0 });
-      bytes += f.size;
-    });
-    render(true); sync();
-    toast('Safe in Haven. ' + items.length + (items.length === 1 ? ' memory.' : ' memories.'));
-    if (window.HavenFX) HavenFX.confetti(innerWidth / 2, innerHeight * .5, 60);
+    HavenMediaStore.add(files).then(refreshMedia).then(function () {
+      toast('Safe in Haven. ' + items.length + (items.length === 1 ? ' memory.' : ' memories.'));
+      if (window.HavenFX) HavenFX.confetti(innerWidth / 2, innerHeight * .5, 60);
+    }).catch(function (error) { reportMediaError('save your media', error); });
   });
 
   /* Viewer */
@@ -118,4 +126,8 @@
   dlg.addEventListener('click', function (e) { if (e.target === dlg) closeViewer(); });
 
   render(false); sync();
+  refreshMedia().catch(function (error) { reportMediaError('load your media', error); });
+  HavenMediaStore.subscribe(function () {
+    refreshMedia().catch(function (error) { reportMediaError('refresh your media', error); });
+  });
 })();
