@@ -17,13 +17,13 @@
     clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastEl.classList.remove('on'); }, undo ? 5000 : 2600);
   }
 
-  /* Library data: newest first. Photos not yet placed use tinted stand-ins. */
+  /* Library data: newest first. */
   var demoItems = [
-    { id: 1, name: 'One more sunset', when: 'Today', url: 'assets/lib-sunset.webp' },
-    { id: 2, name: 'Portrait in shadow', when: 'Today', ph: 'a' },
-    { id: 3, name: 'The great outdoors', when: 'Yesterday', url: 'assets/lib-outdoors.webp' },
-    { id: 4, name: 'Blue hour', when: 'Yesterday', ph: 'b' },
-    { id: 5, name: 'Us, in November', when: 'November 2026', ph: 'c', video: true, dur: '0:18' }
+    { id: 1, name: 'One more sunset', when: 'Today', url: 'assets/Dramatic Side Lighting Portrait.png' },
+    { id: 2, name: 'Dark outside', when: 'Today', url: 'assets/dark outside.png' },
+    { id: 3, name: 'The great outdoors', when: 'Yesterday', url: 'assets/dan.png' },
+    { id: 4, name: 'Tess', when: 'Yesterday', url: 'assets/Tess.mp4', video: true },
+    { id: 5, name: 'Snapchat', when: 'November 2026', url: 'assets/Snapchat.mp4', video: true }
   ];
   var items = demoItems.slice();
   var filter = 'all', query = '', newestFirst = true, selecting = false, picked = {}, fresh = null;
@@ -48,9 +48,9 @@
       var b = document.createElement('button'); b.type = 'button'; b.className = 'm'; b.dataset.id = it.id; b.setAttribute('role', 'listitem');
       b.style.setProperty('--i', Math.min(i, 12));
       if (selecting) { b.setAttribute('aria-checked', picked[it.id] ? 'true' : 'false'); }
-      b.setAttribute('aria-label', it.name + ', ' + it.when + (it.video ? ', video ' + it.dur : ''));
+      b.setAttribute('aria-label', it.name + ', ' + it.when + (it.video ? ', video' + (it.dur ? ' ' + it.dur : '') : ''));
       var m;
-      if (it.url && it.video && it.file) { m = document.createElement('video'); m.muted = true; m.playsInline = true; m.preload = 'metadata'; m.src = it.url; }
+      if (it.url && it.video) { m = document.createElement('video'); m.muted = true; m.playsInline = true; m.preload = 'metadata'; m.src = it.url; }
       else if (it.url) { m = document.createElement('img'); m.src = it.url; m.alt = ''; m.loading = 'lazy'; }
       else { m = document.createElement('span'); m.className = 'ph ' + it.ph; }
       b.appendChild(m);
@@ -155,7 +155,7 @@
     var it = shown[vi]; if (!it) return;
     media.textContent = '';
     var el;
-    if (it.url && it.video && it.file) { el = document.createElement('video'); el.controls = true; el.playsInline = true; el.src = it.url; }
+    if (it.url && it.video) { el = document.createElement('video'); el.controls = true; el.playsInline = true; el.src = it.url; }
     else if (it.url) { el = document.createElement('img'); el.src = it.url; el.alt = it.name; }
     else { el = document.createElement('span'); el.className = 'ph ' + it.ph; }
     media.appendChild(el);
