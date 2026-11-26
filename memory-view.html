@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Haven Memory View</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,1&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="memory-view.css">
+  <link rel="stylesheet" href="effects.css">
+</head>
+<body>
+
+<div class="mv" id="mv">
+  <header class="bar top" id="top">
+    <button class="ic" type="button" id="close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <p class="count" id="count" aria-live="polite">1 of 5</p>
+    <div class="acts">
+      <button class="ic" type="button" id="menuBtn" aria-label="More" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+      <div class="menu" id="menu" role="menu">
+        <button type="button" role="menuitem" id="mInfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>Details</button>
+        <button type="button" role="menuitem" id="mFav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span id="favT">Favourite</span></button>
+        <button type="button" role="menuitem" id="mShow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg><span id="showT">Play slideshow</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="stage" id="stage" aria-label="Memory">
+    <div class="pic" id="pic"><img id="img" src="assets/lib-sunset.webp" alt="" draggable="false"></div>
+    <button class="arrow p" type="button" id="prev" aria-label="Previous memory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="arrow n" type="button" id="next" aria-label="Next memory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+    <div class="fav-pop" id="favPop" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+    <div class="zoomtag" id="zoomTag" aria-hidden="true">100%</div>
+    <div class="gone" id="gone" hidden><b>No memories left</b><span>Everything here was deleted.</span><button class="pillbtn go" type="button" id="goneBack">Back to library</button></div>
+  </main>
+
+  <nav class="bar actions" id="actions" aria-label="Memory actions">
+    <div class="actions-in">
+      <button class="act" type="button" id="aShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg><span>Share</span></button>
+      <button class="act" type="button" id="aDl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span>Download</span></button>
+      <button class="act" type="button" id="aAlb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><path d="M14 4h6"/><path d="M17 1v6"/></svg><span>Add to Album</span></button>
+      <button class="act" type="button" id="aDel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span>Delete</span></button>
+    </div>
+  </nav>
+
+  <aside class="details" id="details" aria-label="Memory details" aria-hidden="true" inert>
+    <span class="grip" aria-hidden="true"></span>
+    <dl class="meta" id="meta">
+      <div><dt>Date taken:</dt><dd id="dTaken"></dd></div>
+      <div><dt>Date added to Vault:</dt><dd id="dAdded"></dd></div>
+      <div><dt>File size:</dt><dd id="dSize"></dd></div>
+      <div><dt>Format:</dt><dd id="dFormat"></dd></div>
+      <div><dt>Dimensions:</dt><dd id="dDims"></dd></div>
+      <div class="safe"><dt>Safe in Haven</dt><dd><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span></dd></div>
+    </dl>
+  </aside>
+</div>
+
+<dialog class="sheet" id="albSheet" aria-labelledby="albT"><div class="sheet-in"><h2 id="albT">Add to album</h2><ul class="alist" id="alist"></ul><div class="sheet-btns"><button class="pillbtn go" type="button" data-close>Done</button></div></div></dialog>
+<dialog class="sheet" id="delSheet" aria-labelledby="delT"><div class="sheet-in"><h2 id="delT">Delete this memory?</h2><p class="sheet-p">It will be removed from Haven and from any albums it&rsquo;s in.</p><div class="sheet-btns"><button class="pillbtn" type="button" data-close>Cancel</button><button class="pillbtn danger" type="button" id="delGo">Delete</button></div></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="effects.js"></script>
+<script src="media-store.js"></script>
+<script src="memory-view.js"></script>
+</body>
+</html>

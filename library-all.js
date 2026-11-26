@@ -146,7 +146,9 @@
       if (picked[id]) delete picked[id]; else picked[id] = true;
       t.setAttribute('aria-checked', picked[id] ? 'true' : 'false'); updateSel(); return;
     }
-    openViewer(shown.map(function (x) { return x.id; }).indexOf(id));
+    var index = shown.map(function (x) { return String(x.id); }).indexOf(id), it = shown[index];
+    if (it && it.url && !it.video) openMemoryPage(it);
+    else openViewer(index);
   });
 
   /* Viewer with prev / next */
@@ -163,6 +165,14 @@
     $('#vPrev').hidden = vi === 0; $('#vNext').hidden = vi === shown.length - 1;
   }
   function openViewer(i) { vi = i; showViewer(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); }
+  function openMemoryPage(it) {
+    var params = new URLSearchParams();
+    params.set('from', 'library-all');
+    params.set('name', it.name);
+    if (it.file && it.id) params.set('id', it.id);
+    else params.set('src', it.url);
+    window.location.href = 'memory-view.html?' + params.toString();
+  }
   function closeViewer() { var v = media.querySelector('video'); if (v) v.pause(); if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
   function step(d) { var n = vi + d; if (n < 0 || n >= shown.length) return; vi = n; showViewer(); }
   $('#viewerX').addEventListener('click', closeViewer);

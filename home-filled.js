@@ -51,7 +51,7 @@
   $('#year').addEventListener('click', function () { si = (si + 1) % stories.length; showStory(); });
   story.addEventListener('click', function () {
     var s = stories[si];
-    openViewer({ name: s.t, url: s.img });
+    openMemoryPage({ name: s.t, url: s.img });
   });
   $('#storyS').textContent = dateLong + ' 2025  \u00b7  8 memories';
 
@@ -112,7 +112,9 @@
 
   $$('[data-add]').forEach(function (b) { b.addEventListener('click', function () { pick.value = ''; pick.click(); }); });
   tilesEl.addEventListener('click', function (e) {
-    var t = e.target.closest('.tile'); if (t) openViewer(items[+t.dataset.i]);
+    var t = e.target.closest('.tile'); if (!t) return;
+    var it = items[+t.dataset.i];
+    if (it.video) openViewer(it); else openMemoryPage(it);
   });
   pick.addEventListener('change', function () {
     var files = Array.prototype.slice.call(pick.files || []).filter(function (f) { return /^(image|video)\//.test(f.type); });
@@ -140,6 +142,14 @@
     if (el.tagName === 'VIDEO') { el.controls = true; el.playsInline = true; } else { el.alt = it.name; }
     media.appendChild(el); $('#viewerCap').textContent = it.name + (it.video && !it.file ? '  \u00b7  video preview' : '');
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  function openMemoryPage(it) {
+    var params = new URLSearchParams();
+    params.set('from', 'home-filled');
+    params.set('name', it.name);
+    if (it.file && it.id) params.set('id', it.id);
+    else params.set('src', it.url);
+    window.location.href = 'memory-view.html?' + params.toString();
   }
   function closeViewer() { var v = media.querySelector('video'); if (v) v.pause(); if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
   $('#viewerX').addEventListener('click', closeViewer);
