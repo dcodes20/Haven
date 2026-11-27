@@ -37,9 +37,11 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .stage { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #0b0d0a; touch-action: none; user-select: none; -webkit-user-select: none; cursor: zoom-in; }
 .stage.zoomed { cursor: grab; }
 .stage.panning { cursor: grabbing; }
-.pic { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
-.pic img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
-.stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .85)); opacity: var(--shade, 1); transition: opacity .3s ease; }
+.pic { position: absolute; inset: 0; z-index: 100; transform-origin: 50% 50%; }
+.pic img, .pic video { position: relative; z-index: 100; display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.pic video { position: absolute; inset: 0; background: #0b0d0a; }
+.pic video[hidden] { display: none; }
+.stage::after { content: ""; display: none; position: absolute; inset: 0; z-index: 50; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .85)); opacity: var(--shade, 1); transition: opacity .3s ease; }
 .stage.zoomed::after { opacity: 0; }
 
 .arrow { position: absolute; top: 50%; z-index: 3; display: none; place-items: center; width: 48px; height: 48px; margin-top: -24px; border-radius: 24px; background: rgba(16, 18, 15, .6); backdrop-filter: blur(6px); color: var(--ink); opacity: 0; transition: opacity .25s ease, background-color .2s ease; }
@@ -68,6 +70,31 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .act:active { transform: scale(.94); }
 #aDel:hover { color: #ff9d8a; }
 .act.hot { color: var(--peach); }
+
+/* Video: dimmed while paused, mute + play in the middle, progress along the bottom */
+.stage.vid { cursor: pointer; }
+.stage.vid .pic { opacity: .75; transition: opacity .35s ease; }
+.stage.vid.playing .pic { opacity: 1; }
+.mv.is-video .actions { display: none; }
+.menu .vo { display: none; }
+.mv.is-video .menu .vo { display: flex; }
+.vctl { position: absolute; left: 50%; top: 50%; z-index: 4; width: 64px; margin: -50px 0 0 -32px; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: opacity .3s ease, transform .3s ease; }
+.vctl[hidden] { display: none; }
+.vctl.away { opacity: 0; transform: scale(.92); pointer-events: none; }
+.vmute { display: grid; place-items: center; width: 36px; height: 28px; margin-bottom: -4px; color: var(--muted); border-radius: 14px; transition: color .2s ease, transform .2s ease; }
+.vmute svg { width: 20px; height: 20px; }
+.vmute:hover { color: var(--ink); } .vmute:active { transform: scale(.9); }
+.vplay { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 32px; background: var(--line); color: var(--ink); transition: background-color .2s ease, transform .25s cubic-bezier(.3, 1.6, .5, 1); }
+.vplay svg { width: 24px; height: 24px; }
+.vplay:hover { background: #454a3f; transform: scale(1.06); } .vplay:active { transform: scale(.94); }
+.vprog { position: absolute; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 4; transform: translateX(-50%); width: min(calc(100% - 48px), 400px); display: flex; align-items: center; gap: 9px; font-size: 12px; line-height: 1.25; color: var(--muted); font-variant-numeric: tabular-nums; }
+.vprog[hidden] { display: none; }
+.vprog span:last-child { opacity: .76; }
+.vtrack { position: relative; flex: 1; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .25); cursor: pointer; touch-action: none; }
+.vtrack::before { content: ""; position: absolute; inset: -14px 0; }
+.vtrack i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 3px; background: var(--ink); }
+.vtrack i::after { content: ""; position: absolute; right: -5px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 5px; background: var(--ink); transform: scale(0); transition: transform .2s ease; }
+.vtrack:hover i::after, .vtrack:focus-visible i::after, .vtrack.scrub i::after { transform: scale(1); }
 
 .mv.immersive .top { transform: translateY(-110%); opacity: 0; pointer-events: none; }
 .mv.immersive .actions { transform: translateY(110%); opacity: 0; pointer-events: none; }

@@ -1,0 +1,117 @@
+<meta charset="utf-8">
+<title>Haven Album Empty</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,1&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="album-detail-empty.css">
+<link rel="stylesheet" href="effects.css">
+
+<div class="app" id="app">
+  <aside class="side" aria-label="Haven">
+    <div class="brand"><img src="assets/icon.webp" alt="" width="24" height="24"><span>Haven</span></div>
+    <nav aria-label="Main">
+      <button class="nav" type="button" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</button>
+      <button class="nav" type="button" data-tab="library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>Library</button>
+      <button class="nav" type="button" data-tab="album" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 22H4a2 2 0 0 1-2-2V6"/><path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18"/><circle cx="12" cy="8" r="2"/><rect width="16" height="16" x="6" y="2" rx="2"/></svg>Album</button>
+      <button class="nav" type="button" data-tab="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+    </nav>
+    <button class="cta" type="button" data-add><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add media</button>
+    <p class="foot">Original quality, always. Only you can see what&rsquo;s here.</p>
+  </aside>
+
+  <div class="main">
+    <header class="top" id="top">
+      <div class="top-in pad">
+        <button class="ic back" type="button" id="back" aria-label="Back to albums"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+        <h1 class="title" id="title">Fun Moments</h1>
+        <div class="acts">
+          <button class="ic" type="button" id="menuBtn" aria-label="Album options" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+          <div class="menu" id="menu" role="menu">
+            <button type="button" role="menuitem" data-add><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add media</button>
+            <button type="button" role="menuitem" id="mSelect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Select</button>
+            <button type="button" role="menuitem" id="mRename"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>Rename album</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="lib pad">
+      <section class="blank" id="blank" aria-label="This album is empty">
+        <div class="art" data-tilt="5">
+          <svg viewBox="0 0 354 251" fill="none" role="img" aria-label="Illustration of a woman slumped on a beanbag with her hand on her forehead, beside a phone showing a warning and an empty folder">
+            <ellipse cx="177" cy="232" rx="165" ry="9" fill="#171a14"/>
+            <g class="float c"><path d="M34 210c-4-26 2-52 18-66 6 18 8 40 2 66zM56 214c0-30 12-56 30-66 2 24-2 46-12 66zM14 214c-2-18 4-34 12-44 6 14 6 30 2 44z" fill="#232a1e"/><path d="M26 214h38l-4 22H30z" fill="#f4f1e8"/><path d="M28 226l6-4 6 4 6-4 6 4" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <path d="M50 232c-16-6-20-34-6-50 14-14 44-16 70-8 26-8 66-2 80 18 12 18 4 36-14 40z" fill="#262c21" stroke="#3b4234" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M66 212c-8-14 2-30 18-34 16-4 34 4 38 16" stroke="#3b4234" stroke-width="2" stroke-linecap="round"/>
+            <path d="M196 178c14-6 30-2 36 8" stroke="#3b4234" stroke-width="2" stroke-linecap="round"/>
+            <path d="M210 212c-8 0-14-6-16-12" stroke="#3b4234" stroke-width="2" stroke-linecap="round"/>
+            <path d="M104 182 142 128" stroke="#2a2f24" stroke-width="44" stroke-linecap="round"/>
+            <path d="M104 182 142 128" stroke="#14170f" stroke-width="40" stroke-linecap="round"/>
+            <path d="M134 190 206 184 244 206" stroke="#f4f1e8" stroke-width="31" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M134 190 206 184 244 206" stroke="#14170f" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M150 198 190 214" stroke="#f4f1e8" stroke-width="27" stroke-linecap="round"/>
+            <path d="M150 198 190 214" stroke="#14170f" stroke-width="23" stroke-linecap="round"/>
+            <path d="M242 202c10 2 18 6 20 14l-26 2z" fill="#f4f1e8" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M246 208l6 6" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+            <path d="M192 212c8 2 14 6 14 12l-26 2z" fill="#f4f1e8" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M134 128 178 122 164 98" stroke="#14170f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="162" cy="96" r="8" fill="#6b4331"/>
+            <path d="M138 118 150 108" stroke="#6b4331" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="148" cy="94" r="16" fill="#6b4331"/>
+            <g fill="#b8531c"><circle cx="134" cy="84" r="9"/><circle cx="147" cy="77" r="10"/><circle cx="161" cy="82" r="9"/><circle cx="131" cy="97" r="8"/><circle cx="141" cy="72" r="7"/><circle cx="154" cy="73" r="7"/></g>
+            <path d="M140 96c0-6 14-6 14 0 0 8-14 8-14 0z" fill="#6b4331"/>
+            <path d="M150 106c3 3 8 3 11 0" stroke="#3a2418" stroke-width="2" stroke-linecap="round"/>
+            <rect x="256" y="42" width="84" height="148" rx="14" fill="#14170f" stroke="#f4f1e8" stroke-width="3"/>
+            <rect x="338" y="96" width="8" height="38" rx="4" fill="#14170f" stroke="#f4f1e8" stroke-width="2.5"/>
+            <rect x="264" y="52" width="68" height="130" rx="8" fill="#f4f1e8"/>
+            <path d="M272 64l4 6 4-6-4-4zM290 62h20" stroke="#111" stroke-width="2" stroke-linecap="round"/><text x="288" y="68" font-family="Inter, sans-serif" font-size="8" fill="#111" font-weight="600" opacity="0"> </text>
+            <path d="M298 90l16 28H282z" fill="#f5a17b" stroke="#111" stroke-width="3" stroke-linejoin="round"/><path d="M298 99v9" stroke="#111" stroke-width="3" stroke-linecap="round"/><circle cx="298" cy="113" r="1.8" fill="#111"/>
+            <rect x="278" y="128" width="40" height="30" rx="4" stroke="#b2b5aa" stroke-width="1.6" stroke-dasharray="4 3"/>
+            <rect x="286" y="136" width="20" height="16" rx="2" stroke="#6b6e64" stroke-width="2"/>
+            <rect x="274" y="164" width="48" height="12" rx="6" fill="#f5a17b"/><path d="M298 167v6m-3-3h6" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+            <path d="M280 100h2" stroke="#111"/>
+            <g class="float"><g transform="rotate(-8 130 34)"><rect x="106" y="14" width="48" height="42" rx="3" fill="#f4f1e8"/><rect x="110" y="18" width="40" height="28" rx="2" fill="#14170f"/><path d="M130 40c-10-6-12-14-6-17 3-1 5 1 6 3 1-2 3-4 6-3 6 3 4 11-6 17z" fill="#f5a17b"/></g></g>
+            <g class="float b"><g transform="rotate(10 224 42)"><rect x="200" y="18" width="52" height="46" rx="3" fill="#f4f1e8"/><rect x="204" y="22" width="44" height="30" rx="2" fill="#f5a17b"/><path d="m204 52 14-16 10 9 8-8 12 15z" fill="#14170f"/><circle cx="238" cy="32" r="4" fill="#f4f1e8"/></g></g>
+            <g class="float c"><g transform="rotate(-10 78 88)"><rect x="54" y="68" width="48" height="42" rx="6" fill="#f4f1e8" stroke="#111" stroke-width="2"/><path d="m72 80 16 8-16 8z" fill="#111"/><circle cx="62" cy="76" r="1.6" fill="#111"/></g></g>
+            <g class="float"><g transform="rotate(8 202 112)"><rect x="180" y="92" width="44" height="42" rx="3" fill="#f4f1e8"/><rect x="184" y="96" width="36" height="26" rx="2" fill="#f5a17b"/><circle cx="196" cy="106" r="4" fill="#14170f"/><circle cx="208" cy="108" r="4" fill="#14170f"/><path d="M190 122c2-8 14-8 16 0M204 122c2-6 10-6 12 0" fill="#14170f"/></g></g>
+            <path d="M280 14c8-6 24-6 30 2 4 8-4 14-12 12m-8-10c4-6 14-6 18 0s-2 12-10 10" stroke="#f4f1e8" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M184 20l2 10M176 22l-2 8M258 80c2-4 6-4 8 0M96 40l-8-6M44 100l8-4" stroke="#f5a17b" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M44 62l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#f5a17b"/><path d="M348 56l3 5 5 3-5 3-3 5-3-5-5-3 5-3z" fill="#f5a17b"/>
+            <path d="M296 192c-8-2-14 6-12 14l4 16h26l-2-16c-2-8-8-14-16-14z" fill="#14170f" stroke="#3b4234" stroke-width="2"/><path d="M290 196c2-12 18-12 20 0" stroke="#3b4234" stroke-width="2.4" fill="none"/>
+          </svg>
+        </div>
+        <div class="msg"><h2>This album is empty</h2><p>Add photos and videos from your library.</p></div>
+        <button class="upload" type="button" data-add data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add media</button>
+      </section>
+      <section class="filled" id="filled" hidden aria-label="Album memories">
+        <div class="fhead"><span id="count">0 memories</span><button class="pillbtn" type="button" data-add><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add media</button></div>
+        <div class="grid" id="grid" role="list"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="selbar" id="selbar" aria-hidden="true"><div class="selbar-in pad"><b id="selN">0 selected</b><button class="pillbtn" type="button" id="selCancel">Cancel</button><button class="pillbtn go" type="button" id="selDel" disabled>Remove</button></div></div>
+</div>
+
+<input class="pick" id="pick" type="file" accept="image/*,video/*" multiple tabindex="-1" aria-hidden="true">
+<dialog class="sheet" id="pickSheet" aria-labelledby="pickT">
+  <div class="sheet-in">
+    <h2 id="pickT">Add from your library</h2>
+    <p class="sheet-p" id="pickP">Choose the photos and videos for this album.</p>
+    <div class="pgrid" id="pgrid" role="group" aria-label="Library"></div>
+    <button class="linkbtn" type="button" id="upNew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Upload from this device</button>
+    <div class="sheet-btns"><span class="memsum" id="pickN">None selected</span><button class="pillbtn" type="button" id="pickCancel">Cancel</button><button class="pillbtn go" type="button" id="pickGo" disabled>Add</button></div>
+  </div>
+</dialog>
+<dialog class="sheet" id="nameSheet" aria-labelledby="nameT">
+  <form class="sheet-in" id="nameForm" novalidate>
+    <h2 id="nameT">Rename album</h2>
+    <label class="lab" for="nm">Album name</label>
+    <input class="txt" id="nm" type="text" maxlength="40" autocomplete="off">
+    <p class="err" id="err" role="alert" hidden>Give your album a name.</p>
+    <div class="sheet-btns"><button class="pillbtn" type="button" id="nameCancel">Cancel</button><button class="pillbtn go" type="submit">Save</button></div>
+  </form>
+</dialog>
+<dialog class="viewer" id="viewer"><button class="x" type="button" id="viewerX" aria-label="Close">&times;</button><button class="nav2 p" type="button" id="vPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><button class="nav2 n" type="button" id="vNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button><figure><div class="media" id="viewerMedia"></div><figcaption id="viewerCap"></figcaption></figure></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="effects.js"></script>
+<script src="album-detail-empty.js"></script>

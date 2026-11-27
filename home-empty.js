@@ -101,7 +101,8 @@
   tilesEl.addEventListener('click', function (e) {
     var t = e.target.closest('.tile'); if (!t) return;
     if (t.hasAttribute('data-add')) { pick.value = ''; pick.click(); return; }
-    openViewer(items[+t.dataset.i]);
+    var it = items[+t.dataset.i];
+    if (it.video) openMemoryPage(it); else openViewer(it);
   });
   pick.addEventListener('change', function () {
     var files = Array.prototype.slice.call(pick.files || []).filter(function (f) { return /^(image|video)\//.test(f.type); });
@@ -120,6 +121,15 @@
     if (it.video) { el.controls = true; el.playsInline = true; } else { el.alt = it.name; }
     media.appendChild(el); $('#viewerCap').textContent = it.name;
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  function openMemoryPage(it) {
+    var params = new URLSearchParams();
+    params.set('from', 'home-empty');
+    params.set('name', it.name);
+    if (it.id) params.set('id', it.id);
+    else params.set('src', it.url);
+    if (it.video) params.set('type', 'video');
+    window.location.href = 'memory-view.html?' + params.toString();
   }
   function closeViewer() { var v = media.querySelector('video'); if (v) v.pause(); if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
   $('#viewerX').addEventListener('click', closeViewer);

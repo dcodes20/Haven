@@ -147,7 +147,7 @@
       t.setAttribute('aria-checked', picked[id] ? 'true' : 'false'); updateSel(); return;
     }
     var index = shown.map(function (x) { return String(x.id); }).indexOf(id), it = shown[index];
-    if (it && it.url && !it.video) openMemoryPage(it);
+    if (it && it.url) openMemoryPage(it);
     else openViewer(index);
   });
 
@@ -171,6 +171,7 @@
     params.set('name', it.name);
     if (it.file && it.id) params.set('id', it.id);
     else params.set('src', it.url);
+    if (it.video) params.set('type', 'video');
     window.location.href = 'memory-view.html?' + params.toString();
   }
   function closeViewer() { var v = media.querySelector('video'); if (v) v.pause(); if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }

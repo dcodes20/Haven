@@ -26,10 +26,10 @@
   });
 
   var albums = [
-    { id: 1, name: 'Tess Outing', count: 24, cover: 'assets/lib-sunset.webp' },
-    { id: 2, name: 'Dee Copywriter', count: 14, ph: 'a' },
-    { id: 3, name: 'Dcodes_UIUX', count: 4, cover: 'assets/lib-outdoors.webp' },
-    { id: 4, name: 'Lifestyle', count: 144, ph: 'b' }
+    { id: 1, name: 'Tess Outing', count: 24, cover: 'assets/profile pic.png' },
+    { id: 2, name: 'Dee Copywriter', count: 14, cover: 'assets/rs.png' },
+    { id: 3, name: 'Dcodes_UIUX', count: 4, cover: 'assets/Dramatic Side Lighting Portrait.png' },
+    { id: 4, name: 'Lifestyle', count: 144, cover: 'assets/tech.png' }
   ], nextId = 5, tone = 0, editing = null, pendingFiles = [];
   var grid = $('#agrid'), blank = $('#blank');
   var dots = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>';

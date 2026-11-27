@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Haven Memory View</title>
+  <link rel="icon" href="assets/icon.webp">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,1&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="memory-view.css">
   <link rel="stylesheet" href="effects.css">
@@ -19,17 +20,26 @@
       <div class="menu" id="menu" role="menu">
         <button type="button" role="menuitem" id="mInfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>Details</button>
         <button type="button" role="menuitem" id="mFav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span id="favT">Favourite</span></button>
+        <button type="button" role="menuitem" class="vo" id="vShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>Share</button>
+        <button type="button" role="menuitem" class="vo" id="vDl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>Download</button>
+        <button type="button" role="menuitem" class="vo" id="vAlb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><path d="M14 4h6"/><path d="M17 1v6"/></svg>Add to album</button>
+        <button type="button" role="menuitem" class="vo" id="vDel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Delete</button>
         <button type="button" role="menuitem" id="mShow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg><span id="showT">Play slideshow</span></button>
       </div>
     </div>
   </header>
 
   <main class="stage" id="stage" aria-label="Memory">
-    <div class="pic" id="pic"><img id="img" src="assets/lib-sunset.webp" alt="" draggable="false"></div>
+    <div class="pic" id="pic"><img id="img" src="assets/lib-sunset.webp" alt="" draggable="false"><video id="vid" playsinline muted preload="metadata" hidden></video></div>
     <button class="arrow p" type="button" id="prev" aria-label="Previous memory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
     <button class="arrow n" type="button" id="next" aria-label="Next memory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
     <div class="fav-pop" id="favPop" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
     <div class="zoomtag" id="zoomTag" aria-hidden="true">100%</div>
+    <div class="vctl" id="vctl" hidden>
+      <button class="vmute" type="button" id="vMute" aria-label="Unmute"><svg id="vMuteI" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg></button>
+      <button class="vplay" type="button" id="vPlay" aria-label="Play"><svg id="vPlayI" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></button>
+    </div>
+    <div class="vprog" id="vprog" hidden><span id="vCur">0.00</span><div class="vtrack" id="vTrack" role="slider" tabindex="0" aria-label="Video progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="vFill"></i></div><span id="vDur">0.10</span></div>
     <div class="gone" id="gone" hidden><b>No memories left</b><span>Everything here was deleted.</span><button class="pillbtn go" type="button" id="goneBack">Back to library</button></div>
   </main>
 

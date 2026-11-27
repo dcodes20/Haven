@@ -114,7 +114,7 @@
   tilesEl.addEventListener('click', function (e) {
     var t = e.target.closest('.tile'); if (!t) return;
     var it = items[+t.dataset.i];
-    if (it.video) openViewer(it); else openMemoryPage(it);
+    openMemoryPage(it);
   });
   pick.addEventListener('change', function () {
     var files = Array.prototype.slice.call(pick.files || []).filter(function (f) { return /^(image|video)\//.test(f.type); });
@@ -149,6 +149,7 @@
     params.set('name', it.name);
     if (it.file && it.id) params.set('id', it.id);
     else params.set('src', it.url);
+    if (it.video && (it.file || /\.(mp4|webm|mov)(?:[?#].*)?$/i.test(it.url))) params.set('type', 'video');
     window.location.href = 'memory-view.html?' + params.toString();
   }
   function closeViewer() { var v = media.querySelector('video'); if (v) v.pause(); if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
